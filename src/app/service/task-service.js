@@ -26,6 +26,7 @@ var CHECKLIST_ITEMS = [
 var TaskService = (function () {
     function TaskService() {
         this.tasks = TASKS;
+        this.checklistItems = CHECKLIST_ITEMS;
     }
     TaskService.prototype.getTasks = function () {
         return this.tasks;
@@ -35,18 +36,23 @@ var TaskService = (function () {
             return;
         }
         var task = {
-            id: this.getNextId(),
+            id: this.getNextId(this.tasks),
             name: newTask.name,
             isDeleted: false
         };
         this.tasks.push(task);
         newTask.value = null;
     };
-    TaskService.prototype.getNextId = function () {
+    TaskService.prototype.getTaskChecklist = function (task) {
+        return this.checklistItems.filter(function (value, index, array) {
+            return (value.taskId == task.id);
+        });
+    };
+    TaskService.prototype.getNextId = function (collection) {
         var maxId = Math
             .max
-            .apply(null, this.tasks.map(function (task) {
-            return task.id;
+            .apply(null, collection.map(function (item) {
+            return item.id;
         }));
         return maxId + 1;
     };

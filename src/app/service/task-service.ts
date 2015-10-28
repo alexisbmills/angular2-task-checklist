@@ -18,8 +18,10 @@ var CHECKLIST_ITEMS: ChecklistItem[] = [
 @Injectable()
 export class TaskService {
   tasks: Task[];
+  checklistItems: ChecklistItem[];
   constructor() {
     this.tasks = TASKS;
+    this.checklistItems = CHECKLIST_ITEMS;
   }
   getTasks() {
     return this.tasks;
@@ -29,18 +31,23 @@ export class TaskService {
       return;
     }
     var task: Task = {
-      id: this.getNextId(),
+      id: this.getNextId(this.tasks),
       name: newTask.name,
       isDeleted: false
     }
     this.tasks.push(task);
     newTask.value = null;
   }
-  getNextId() {
+  getTaskChecklist(task: Task) {
+    return this.checklistItems.filter(function(value: ChecklistItem, index: number, array: ChecklistItem[]) {
+      return (value.taskId == task.id);
+    });
+  }
+  getNextId(collection) {
     var maxId = Math
       .max
-      .apply(null, this.tasks.map(function(task) {
-        return task.id;
+      .apply(null, collection.map(function(item) {
+        return item.id;
       }));
 
     return maxId + 1;
