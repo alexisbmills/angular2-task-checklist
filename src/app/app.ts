@@ -1,8 +1,10 @@
 import {bootstrap, View, Component, CORE_DIRECTIVES, FORM_DIRECTIVES} from 'angular2/angular2';
-import {TaskList} from './task-list/task-list';
+import {TaskListComponent} from './task-list/task-list';
 import {Task} from './entity/task';
+import {TaskService} from './service/task-service';
 @Component({
-    selector: 'my-app'
+    selector: 'my-app',
+    bindings: [TaskService]
 })
 @View({
     template: `
@@ -12,7 +14,7 @@ import {Task} from './entity/task';
                     <h1>{{title}}</h1>
                 </div>
             </div>
-            <section class="row" *ng-if="viewMode ==='taskList'">
+            <div class="row">
                 <div class="col-md-12">
                     <h2>My Tasks</h2>  
                     <div class="row add-task">                    
@@ -28,14 +30,16 @@ import {Task} from './entity/task';
                             <button class="btn btn-primary" (click)="onAddTask(newTask)">Add new Task</button>
                         </div>
                     </div>
-                    <div class="tasks">                    
-                        <task-list class="row" [tasks]="tasks"></task-list>
-                    </div>
                 </div>
-            </section>   
+            </div>              
+            <div class="tasks row">
+                <div class="col-md-12">                 
+                    <task-list [tasks]="tasks"></task-list>
+                </div>
+            </div> 
         </section>
     `,
-    directives: [CORE_DIRECTIVES, FORM_DIRECTIVES, TaskList],
+    directives: [CORE_DIRECTIVES, FORM_DIRECTIVES, TaskListComponent],
     styles: [`
         .tasks {padding: 0; width: 100%; color: #454545; }        
         .selected { color: #369; }
@@ -43,10 +47,10 @@ import {Task} from './entity/task';
 })
 class AppComponent {
     public title = 'Tasks';
+    public taskService: TaskService;
     public newTask: Task;
-    protected viewMode: string;
-    constructor() {
-        this.viewMode = 'taskList';
+    constructor(taskService: TaskService) {
+        this.taskService = taskService;
         this.resetNewTask();
     }
     resetNewTask() {        
@@ -55,17 +59,8 @@ class AppComponent {
         this.newTask.isDeleted = false;
     }
     onAddTask(newTask) {
-        console.log('adding');
-        if (!newTask.name) {
-            return;
-        }
-        var task: Task = {
-            id: this.getNextId(),
-            name: newTask.name,
-            isDeleted: false
-        }
-        this.tasks.push(task); 
-        newTask.value = null;
+        this.taskService.addTask(newTask);
+        this.resetNewTask();
     }
 }
 bootstrap(AppComponent);

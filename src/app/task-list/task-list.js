@@ -11,23 +11,23 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var angular2_1 = require('angular2/angular2');
 var task_service_1 = require('../service/task-service');
-var TaskList = (function () {
-    function TaskList(taskService) {
+var TaskListComponent = (function () {
+    function TaskListComponent(taskService) {
         this.tasks = taskService.getTasks();
     }
-    TaskList.prototype.getSelectedClass = function (task) {
+    TaskListComponent.prototype.getSelectedClass = function (task) {
         return { 'selected': task === this.selectedTask };
     };
-    TaskList.prototype.onEditTask = function (task) {
+    TaskListComponent.prototype.onEditTask = function (task) {
         this.selectedTask = task;
     };
-    TaskList.prototype.onSaveTask = function (task) {
+    TaskListComponent.prototype.onSaveTask = function (task) {
         this.selectedTask = null;
     };
-    TaskList.prototype.onDeleteTask = function (task) {
+    TaskListComponent.prototype.onDeleteTask = function (task) {
         task.isDeleted = true;
     };
-    TaskList = __decorate([
+    TaskListComponent = __decorate([
         angular2_1.Component({
             selector: 'task-list',
             bindings: [task_service_1.TaskService]
@@ -38,9 +38,8 @@ var TaskList = (function () {
             styles: ["\n        .task { padding: .8em 0; border-bottom: 1px solid #eee;}\n        .task .name { position: relative; }\n        .task .name { cursor: pointer; display: inline-block;  position: relative; left: 0; transition: all 0.2s ease; }\n        .task .name:hover {color: #369; left: .2em; }\n        .selected { color: #369; }\n    "]
         }), 
         __metadata('design:paramtypes', [task_service_1.TaskService])
-    ], TaskList);
-    return TaskList;
+    ], TaskListComponent);
+    return TaskListComponent;
 })();
-exports.TaskList = TaskList;
-angular2_1.bootstrap(TaskList);
+exports.TaskListComponent = TaskListComponent;
 //# sourceMappingURL=task-list.js.map

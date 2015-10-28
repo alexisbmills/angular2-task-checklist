@@ -42,7 +42,7 @@ import {TaskService} from '../service/task-service';
         .selected { color: #369; }
     `]
 })
-export class TaskList {
+export class TaskListComponent {
     public tasks: Array<Task>;
     public selectedTask: Task;
     constructor(taskService: TaskService) {
@@ -62,4 +62,3 @@ export class TaskList {
         task.isDeleted = true;
     }
 }
-bootstrap(TaskList);
