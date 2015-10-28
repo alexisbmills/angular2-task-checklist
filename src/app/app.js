@@ -11,11 +11,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var angular2_1 = require('angular2/angular2');
 var task_list_1 = require('./task-list/task-list');
-var Task = (function () {
-    function Task() {
-    }
-    return Task;
-})();
+var task_1 = require('./entity/task');
 var AppComponent = (function () {
     function AppComponent() {
         this.title = 'Tasks';
@@ -23,7 +19,7 @@ var AppComponent = (function () {
         this.resetNewTask();
     }
     AppComponent.prototype.resetNewTask = function () {
-        this.newTask = new Task();
+        this.newTask = new task_1.Task();
         this.newTask.name = null;
         this.newTask.isDeleted = false;
     };
@@ -40,18 +36,12 @@ var AppComponent = (function () {
         this.tasks.push(task);
         newTask.value = null;
     };
-    AppComponent.prototype.getNextId = function () {
-        var maxId = Math
-            .max
-            .apply(null, this.tasks.map(function (task) {
-            return task.id;
-        }));
-        return maxId + 1;
-    };
     AppComponent = __decorate([
         angular2_1.Component({
-            selector: 'my-app',
-            template: "\n        <section>\n            <div class=\"row\">\n                <div class=\"col-md-12\">\n                    <h1>{{title}}</h1>\n                </div>\n            </div>\n            <section class=\"row\" *ng-if=\"viewMode ==='taskList'\">\n                <div class=\"col-md-12\">\n                    <h2>My Tasks</h2>  \n                    <div class=\"row add-task\">                    \n                        <div class=\"col-md-4\">                \n                            <input\n                                class=\"typl8-gamma form-control\"\n                                min-length=\"1\"\n                                [(ng-model)]=\"newTask.name\" \n                                (keyup.enter)=\"onAddTask(newTask)\" \n                                placeholder=\"Add a new task\">\n                            </div>               \n                        <div class=\"col-md-4\">      \n                            <button class=\"btn btn-primary\" (click)=\"onAddTask(newTask)\">Add new Task</button>\n                        </div>\n                    </div>\n                    <div class=\"tasks\">                    \n                        <task-list class=\"row\" items=\"tasks\"></task-list>\n                    </div>\n                </div>\n            </section>   \n        </section>\n    ",
+            selector: 'my-app'
+        }),
+        angular2_1.View({
+            template: "\n        <section>\n            <div class=\"row\">\n                <div class=\"col-md-12\">\n                    <h1>{{title}}</h1>\n                </div>\n            </div>\n            <section class=\"row\" *ng-if=\"viewMode ==='taskList'\">\n                <div class=\"col-md-12\">\n                    <h2>My Tasks</h2>  \n                    <div class=\"row add-task\">                    \n                        <div class=\"col-md-4\">                \n                            <input\n                                class=\"typl8-gamma form-control\"\n                                min-length=\"1\"\n                                [(ng-model)]=\"newTask.name\" \n                                (keyup.enter)=\"onAddTask(newTask)\" \n                                placeholder=\"Add a new task\">\n                            </div>               \n                        <div class=\"col-md-4\">      \n                            <button class=\"btn btn-primary\" (click)=\"onAddTask(newTask)\">Add new Task</button>\n                        </div>\n                    </div>\n                    <div class=\"tasks\">                    \n                        <task-list class=\"row\" [tasks]=\"tasks\"></task-list>\n                    </div>\n                </div>\n            </section>   \n        </section>\n    ",
             directives: [angular2_1.CORE_DIRECTIVES, angular2_1.FORM_DIRECTIVES, task_list_1.TaskList],
             styles: ["\n        .tasks {padding: 0; width: 100%; color: #454545; }        \n        .selected { color: #369; }\n    "],
         }), 
@@ -59,5 +49,5 @@ var AppComponent = (function () {
     ], AppComponent);
     return AppComponent;
 })();
-angular2_1.bootstrap(AppComponent, [TaskService]);
+angular2_1.bootstrap(AppComponent);
 //# sourceMappingURL=app.js.map

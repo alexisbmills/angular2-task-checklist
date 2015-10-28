@@ -11,11 +11,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var angular2_1 = require('angular2/angular2');
 var task_service_1 = require('../service/task-service');
-var Task = (function () {
-    function Task() {
-    }
-    return Task;
-})();
 var TaskList = (function () {
     function TaskList(taskService) {
         this.tasks = taskService.getTasks();
@@ -35,14 +30,17 @@ var TaskList = (function () {
     TaskList = __decorate([
         angular2_1.Component({
             selector: 'task-list',
-            template: "\n        <div class=\"row task\" *ng-for=\"#task of tasks\" [ng-class]=\"getSelectedClass(task)\">\n            <div class=\"col-md-8 name\">\n                <input type=\"text\" class=\"typl8-gamma form-control edit-task\" value=\"{{task.name}}\" min-length=\"1\" *ng-if=\"selectedTask === task\">\n                <span class=\"task-name typl8-gamma\" *ng-if=\"selectedTask !== task\">{{task.name}}</span>\n            </div>\n            <div class=\"col-md-4 actions\">           \n                <span *ng-if=\"selectedTask === task\">                 \n                    <button class=\"btn btn-default\" (click)=\"onSaveTask(task)\">\n                        <span class=\"glyphicon glyphicon-floppy-save\"></span> Save\n                    </button>                           \n                    <button class=\"btn btn-default\" (click)=\"onCancelSaveTask(task)\">\n                        <span class=\"glyphicon glyphicon-floppy-save\"></span> Save\n                    </button> \n                </span>\n                <span *ng-if=\"selectedTask !== task\">\n                    <button class=\"btn btn-default\" (click)=\"onEditTask(task)\">\n                        <span class=\"glyphicon glyphicon-edit\"></span> Edit\n                    </button> \n                    <button class=\"btn btn-default\" (click)=\"onDeleteTask(task)\">\n                        <span class=\"glyphicon glyphicon-remove\"></span> Delete\n                    </button>\n                </span>\n            </div>\n        </div>\n    ",
+            bindings: [task_service_1.TaskService]
+        }),
+        angular2_1.View({
+            template: "\n        <div class=\"row task\" *ng-for=\"#task of tasks\" [ng-class]=\"getSelectedClass(task)\">\n            <div class=\"col-md-8 name\">\n                <input type=\"text\" class=\"typl8-gamma form-control edit-task\" value=\"{{task.name}}\" min-length=\"1\" *ng-if=\"selectedTask === task\">\n                <span class=\"task-name typl8-gamma\" *ng-if=\"selectedTask !== task\">{{task.name}}</span>\n            </div>\n            <div class=\"col-md-4 actions\">\n                <span *ng-if=\"selectedTask === task\">\n                    <button class=\"btn btn-default\" (click)=\"onSaveTask(task)\">\n                        <span class=\"glyphicon glyphicon-floppy-save\"></span> Save\n                    </button>\n                    <button class=\"btn btn-default\" (click)=\"onCancelSaveTask(task)\">\n                        <span class=\"glyphicon glyphicon-floppy-save\"></span> Save\n                    </button>\n                </span>\n                <span *ng-if=\"selectedTask !== task\">\n                    <button class=\"btn btn-default\" (click)=\"onEditTask(task)\">\n                        <span class=\"glyphicon glyphicon-edit\"></span> Edit\n                    </button>\n                    <button class=\"btn btn-default\" (click)=\"onDeleteTask(task)\">\n                        <span class=\"glyphicon glyphicon-remove\"></span> Delete\n                    </button>\n                </span>\n            </div>\n        </div>\n    ",
             directives: [angular2_1.CORE_DIRECTIVES, angular2_1.FORM_DIRECTIVES],
-            styles: ["\n        .task { padding: .8em 0; border-bottom: 1px solid #eee;}\n        .task .name { position: relative; }\n        .task .name { cursor: pointer; display: inline-block;  position: relative; left: 0; transition: all 0.2s ease; }\n        .task .name:hover {color: #369; left: .2em; }        \n        .selected { color: #369; }\n    "],
+            styles: ["\n        .task { padding: .8em 0; border-bottom: 1px solid #eee;}\n        .task .name { position: relative; }\n        .task .name { cursor: pointer; display: inline-block;  position: relative; left: 0; transition: all 0.2s ease; }\n        .task .name:hover {color: #369; left: .2em; }\n        .selected { color: #369; }\n    "]
         }), 
-        __metadata('design:paramtypes', [(typeof (_a = typeof task_service_1.TaskService !== 'undefined' && task_service_1.TaskService) === 'function' && _a) || Object])
+        __metadata('design:paramtypes', [task_service_1.TaskService])
     ], TaskList);
     return TaskList;
-    var _a;
 })();
 exports.TaskList = TaskList;
+angular2_1.bootstrap(TaskList);
 //# sourceMappingURL=task-list.js.map

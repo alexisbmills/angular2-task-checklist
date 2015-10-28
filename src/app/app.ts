@@ -1,12 +1,10 @@
-import {bootstrap, Component, CORE_DIRECTIVES, FORM_DIRECTIVES} from 'angular2/angular2';
+import {bootstrap, View, Component, CORE_DIRECTIVES, FORM_DIRECTIVES} from 'angular2/angular2';
 import {TaskList} from './task-list/task-list';
-class Task {
-    id: number;
-    name: string;
-    isDeleted: boolean;
-}
+import {Task} from './entity/task';
 @Component({
-    selector: 'my-app',
+    selector: 'my-app'
+})
+@View({
     template: `
         <section>
             <div class="row">
@@ -31,7 +29,7 @@ class Task {
                         </div>
                     </div>
                     <div class="tasks">                    
-                        <task-list class="row" items="tasks"></task-list>
+                        <task-list class="row" [tasks]="tasks"></task-list>
                     </div>
                 </div>
             </section>   
@@ -69,14 +67,5 @@ class AppComponent {
         this.tasks.push(task); 
         newTask.value = null;
     }
-    getNextId() {
-        var maxId = Math
-            .max
-            .apply(null, this.tasks.map(function(task) {
-                return task.id;
-            }));
-            
-        return maxId + 1;
-    }
 }
-bootstrap(AppComponent, [TaskService]);
+bootstrap(AppComponent);
