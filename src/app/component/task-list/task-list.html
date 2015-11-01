@@ -1,0 +1,30 @@
+<div *ng-for="#task of taskService.getActiveTasks()" [ng-class]="getSelectedClass(task)">
+        <div class="row task">
+                <div class="col-md-8 name">
+                        <input type="text" class="typl8-gamma form-control edit-task" [(ng-model)]="task.name" min-length="1" *ng-if="editingTask === task">
+                        <span class="task-name typl8-gamma" *ng-if="editingTask !== task" (click)="onViewChecklist(task)">{{task.name}}</span>
+                </div>
+                <div class="col-md-4 actions">
+                        <span *ng-if="editingTask === task">
+                                <button class="btn btn-default" (click)="onSaveTask(task)">Save</button>
+                                <button class="btn btn-default" (click)="onCancelSaveTask(task)">Cancel</button>
+                        </span>
+                        <span *ng-if="editingTask !== task">
+                                <button class="btn btn-default" (click)="onEditTask(task)">Edit</button>
+                                <button class="btn btn-default" (click)="onDeleteTask(task)">Delete</button>
+                        </span>
+                </div>
+        </div>
+        <div *ng-if="viewingTaskChecklist === task">
+                <div class="row add-item">
+                        <div class="col-md-4">
+                                <input class="typl8-gamma form-control" min-length="1" [(ng-model)]="newItem.name" (keyup.enter)="onAddChecklistItem(newItem, task)"
+                                placeholder="Add a new task">
+                        </div>
+                        <div class="col-md-4">
+                                <button class="btn btn-primary" (click)="onAddChecklistItem(newItem, task)">Add new item</button>
+                        </div>
+                </div>
+                <checklist [task]="task"></checklist>
+        </div>
+</div>

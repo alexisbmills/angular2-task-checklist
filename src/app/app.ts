@@ -1,5 +1,5 @@
 import {bootstrap, View, Component, CORE_DIRECTIVES, FORM_DIRECTIVES} from 'angular2/angular2';
-import {TaskListComponent} from './task-list/task-list';
+import {TaskListComponent} from './component/task-list/task-list';
 import {Task} from './entity/task';
 import {TaskService} from './service/task-service';
 @Component({
@@ -34,7 +34,7 @@ import {TaskService} from './service/task-service';
             </div>              
             <div class="tasks row">
                 <div class="col-md-12">                 
-                    <task-list [tasks]="tasks"></task-list>
+                    <task-list></task-list>
                 </div>
             </div> 
         </section>

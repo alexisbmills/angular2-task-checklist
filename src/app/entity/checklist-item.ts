@@ -1,4 +1,4 @@
-export class ChecklistItem {    
+export class ChecklistItem implements Deleteable {    
     id: number;
     taskId: number;
     name: string;

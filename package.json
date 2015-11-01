@@ -6,9 +6,9 @@
     "start": "live-server --open=src"
   },
   "dependencies": {
-    "angular2": "2.0.0-alpha.44",
+    "angular2": "2.0.0-alpha.45",
     "systemjs": "0.19.2",
-    "bootstrap": "3.3.5",
+    "bootstrap-sass": "3.3.5",
     "ng2-bootstrap": "*"
   },
   "devDependencies": {

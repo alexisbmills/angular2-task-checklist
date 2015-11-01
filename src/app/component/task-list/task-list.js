@@ -10,22 +10,43 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var angular2_1 = require('angular2/angular2');
-var task_service_1 = require('../service/task-service');
+var checklist_item_1 = require('../../entity/checklist-item');
+var checklist_1 = require('../checklist/checklist');
+var task_service_1 = require('../../service/task-service');
 var TaskListComponent = (function () {
     function TaskListComponent(taskService) {
-        this.tasks = taskService.getTasks();
+        this.taskService = taskService;
     }
     TaskListComponent.prototype.getSelectedClass = function (task) {
-        return { 'selected': task === this.selectedTask };
+        return { 'selected': task === this.editingTask };
     };
     TaskListComponent.prototype.onEditTask = function (task) {
-        this.selectedTask = task;
+        this.editingTask = task;
     };
     TaskListComponent.prototype.onSaveTask = function (task) {
-        this.selectedTask = null;
+        this.editingTask = null;
+    };
+    TaskListComponent.prototype.onCancelSaveTask = function () {
+        this.editingTask = null;
     };
     TaskListComponent.prototype.onDeleteTask = function (task) {
-        task.isDeleted = true;
+        if (confirm('Delete this task?')) {
+            this.taskService.toggleDeleted(task);
+        }
+    };
+    TaskListComponent.prototype.onViewChecklist = function (task) {
+        console.log('viewing');
+        this.viewingTaskChecklist = task;
+    };
+    TaskListComponent.prototype.onAddChecklistItem = function (newItem, task) {
+        this.taskService.addChecklistItemToTask(newItem, task);
+        this.resetNewItem();
+    };
+    TaskListComponent.prototype.resetNewItem = function () {
+        this.newItem = new checklist_item_1.ChecklistItem();
+        this.newItem.name = null;
+        this.newItem.isDeleted = false;
+        this.newItem.isChecked = false;
     };
     TaskListComponent = __decorate([
         angular2_1.Component({
@@ -33,8 +54,8 @@ var TaskListComponent = (function () {
             bindings: [task_service_1.TaskService]
         }),
         angular2_1.View({
-            template: "\n        <div class=\"row task\" *ng-for=\"#task of tasks\" [ng-class]=\"getSelectedClass(task)\">\n            <div class=\"col-md-8 name\">\n                <input type=\"text\" class=\"typl8-gamma form-control edit-task\" value=\"{{task.name}}\" min-length=\"1\" *ng-if=\"selectedTask === task\">\n                <span class=\"task-name typl8-gamma\" *ng-if=\"selectedTask !== task\">{{task.name}}</span>\n            </div>\n            <div class=\"col-md-4 actions\">\n                <span *ng-if=\"selectedTask === task\">\n                    <button class=\"btn btn-default\" (click)=\"onSaveTask(task)\">\n                        <span class=\"glyphicon glyphicon-floppy-save\"></span> Save\n                    </button>\n                    <button class=\"btn btn-default\" (click)=\"onCancelSaveTask(task)\">\n                        <span class=\"glyphicon glyphicon-floppy-save\"></span> Save\n                    </button>\n                </span>\n                <span *ng-if=\"selectedTask !== task\">\n                    <button class=\"btn btn-default\" (click)=\"onEditTask(task)\">\n                        <span class=\"glyphicon glyphicon-edit\"></span> Edit\n                    </button>\n                    <button class=\"btn btn-default\" (click)=\"onDeleteTask(task)\">\n                        <span class=\"glyphicon glyphicon-remove\"></span> Delete\n                    </button>\n                </span>\n            </div>\n        </div>\n    ",
-            directives: [angular2_1.CORE_DIRECTIVES, angular2_1.FORM_DIRECTIVES],
+            templateUrl: 'app/component/task-list/task-list.html',
+            directives: [angular2_1.CORE_DIRECTIVES, angular2_1.FORM_DIRECTIVES, checklist_1.CheckListComponent],
             styles: ["\n        .task { padding: .8em 0; border-bottom: 1px solid #eee;}\n        .task .name { position: relative; }\n        .task .name { cursor: pointer; display: inline-block;  position: relative; left: 0; transition: all 0.2s ease; }\n        .task .name:hover {color: #369; left: .2em; }\n        .selected { color: #369; }\n    "]
         }), 
         __metadata('design:paramtypes', [task_service_1.TaskService])

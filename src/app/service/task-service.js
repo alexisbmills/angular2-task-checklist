@@ -21,15 +21,18 @@ var CHECKLIST_ITEMS = [
     { "id": 13, "taskId": 11, "name": "Oranges", isChecked: false, isDeleted: false },
     { "id": 14, "taskId": 12, "name": "Buy tickets", isChecked: false, isDeleted: false },
     { "id": 15, "taskId": 12, "name": "Call James to arrange pickup", isChecked: false, isDeleted: false },
-    { "id": 16, "taskId": 12, "name": "Invite Stefan", isChecked: false, isDeleted: false }
+    { "id": 16, "taskId": 12, "name": "Invite Stefan", isChecked: false, isDeleted: false },
+    { "id": 17, "taskId": 13, "name": "Call James to arrange pickup", isChecked: false, isDeleted: false }
 ];
 var TaskService = (function () {
     function TaskService() {
         this.tasks = TASKS;
         this.checklistItems = CHECKLIST_ITEMS;
     }
-    TaskService.prototype.getTasks = function () {
-        return this.tasks;
+    TaskService.prototype.getActiveTasks = function () {
+        return this.tasks.filter(function (value, index, array) {
+            return (value.isDeleted === false);
+        });
     };
     TaskService.prototype.addTask = function (newTask) {
         if (!newTask.name) {
@@ -43,10 +46,38 @@ var TaskService = (function () {
         this.tasks.push(task);
         newTask.value = null;
     };
+    TaskService.prototype.saveTask = function (task) {
+        var editedTask;
+        editedTask = this.tasks.find(function (value, index, array) {
+            return (value.id == task.id);
+        });
+        editedTask = task;
+    };
     TaskService.prototype.getTaskChecklist = function (task) {
+        console.log('getting list for task id: ' + task.id);
         return this.checklistItems.filter(function (value, index, array) {
             return (value.taskId == task.id);
         });
+    };
+    TaskService.prototype.addChecklistItemToTask = function (newChecklistItem, task) {
+        if (!newChecklistItem.name) {
+            return;
+        }
+        var checklistItem = {
+            id: this.getNextId(this.checklistItems),
+            taskId: task.id,
+            name: newChecklistItem.name,
+            isChecked: false,
+            isDeleted: false
+        };
+        this.checklistItems.push(checklistItem);
+        newChecklistItem.value = null;
+    };
+    TaskService.prototype.toggleChecked = function (checklistItem) {
+        checklistItem.isChecked = !checklistItem.isChecked;
+    };
+    TaskService.prototype.toggleDeleted = function (deletable) {
+        deletable.isDeleted = !deletable.isDeleted;
     };
     TaskService.prototype.getNextId = function (collection) {
         var maxId = Math

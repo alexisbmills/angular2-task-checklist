@@ -7,17 +7,16 @@ git clone git@bitbucket.org:alexisbmills/ng2-task.git
 ```
 ### Install dependencies
 ```
+npm install -g node-sass live-server 
 npm install
 ```
+
 ### Virtual host
 See `apache-virtualhost.dist` 
 
-Run typescript converter
+## Run
+Run typescript converter and launch project
 ```
 npm run tsc
-```
-
-Launch project
-```
 npm start
 ```
