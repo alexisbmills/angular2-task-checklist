@@ -6,7 +6,7 @@ import {TaskService} from '../../service/task-service';
 @Component({
     selector: 'checklist',
     bindings: [TaskService],
-    inputs: ['task']
+    inputs: ['checklist:checklist']
 })
 @View({
     templateUrl: 'app/component/checklist/checklist.html',
@@ -20,7 +20,7 @@ import {TaskService} from '../../service/task-service';
     `]
 })
 export class CheckListComponent {
-    task: Task;
+    checklist: Array<ChecklistItem>;
     selectedItem: ChecklistItem;
     constructor(public taskService: TaskService) {
     }

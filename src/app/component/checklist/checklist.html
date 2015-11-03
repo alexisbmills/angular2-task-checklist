@@ -1,8 +1,9 @@
-<div class="row checklist-item" *ng-for="#item of taskService.getTaskChecklist(task)" [ng-class]="getSelectedClass(item)">
+<div class="row checklist-item" *ng-for="#item of checklist" [ng-class]="getSelectedClass(item)">
 	<div class="col-md-8 name">
-		<input type="text" class="typl8-gamma form-control edit-item" *ng-if="selectedItem === item" [(ngModel)]="{{item.name}}"
+		<!--<input type="text" class="typl8-gamma form-control edit-item" *ng-if="selectedItem === item" [(ngModel)]="{{item.name}}"
 		min-length="1">
-		<span class="name typl8-gamma" *ng-if="selectedItem !== item" (click)="onCheck(item)">{{item.name}}</span>
+		<span class="name typl8-gamma" *ng-if="selectedItem !== item" (click)="onCheck(item)">{{item.name}}</span>-->
+		sjsjssj
 	</div>
 	<div class="col-md-4 actions">
 		<span *ng-if="selectedItem === item">

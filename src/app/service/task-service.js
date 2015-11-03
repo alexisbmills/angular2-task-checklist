@@ -56,6 +56,7 @@ var TaskService = (function () {
     TaskService.prototype.getTaskChecklist = function (task) {
         console.log('getting list for task id: ' + task.id);
         return this.checklistItems.filter(function (value, index, array) {
+            console.log('showing ' + value.name);
             return (value.taskId == task.id);
         });
     };

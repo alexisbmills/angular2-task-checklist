@@ -34,7 +34,7 @@ var CheckListComponent = (function () {
         angular2_1.Component({
             selector: 'checklist',
             bindings: [task_service_1.TaskService],
-            inputs: ['task']
+            inputs: ['checklist:checklist']
         }),
         angular2_1.View({
             templateUrl: 'app/component/checklist/checklist.html',

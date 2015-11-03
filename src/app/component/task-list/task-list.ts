@@ -21,9 +21,10 @@ import {TaskService} from '../../service/task-service';
 })
 export class TaskListComponent {
     editingTask: Task;
-    viewingTaskChecklist: Task;
+    viewingTask: Task;
     newItem: ChecklistItem;
     constructor(public taskService: TaskService) {
+        this.resetNewItem();
     }
     getSelectedClass(task: Task) {
         return { 'selected': task === this.editingTask };
@@ -43,8 +44,8 @@ export class TaskListComponent {
         }
     }
     onViewChecklist(task: Task) {
-        console.log('viewing');
-        this.viewingTaskChecklist = task;
+        console.log('viewing task id: ' + task.id);
+        this.viewingTask = task;
     }
     onAddChecklistItem(newItem, task: Task) {
         this.taskService.addChecklistItemToTask(newItem, task);

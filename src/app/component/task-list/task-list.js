@@ -16,6 +16,7 @@ var task_service_1 = require('../../service/task-service');
 var TaskListComponent = (function () {
     function TaskListComponent(taskService) {
         this.taskService = taskService;
+        this.resetNewItem();
     }
     TaskListComponent.prototype.getSelectedClass = function (task) {
         return { 'selected': task === this.editingTask };
@@ -35,8 +36,8 @@ var TaskListComponent = (function () {
         }
     };
     TaskListComponent.prototype.onViewChecklist = function (task) {
-        console.log('viewing');
-        this.viewingTaskChecklist = task;
+        console.log('viewing task id: ' + task.id);
+        this.viewingTask = task;
     };
     TaskListComponent.prototype.onAddChecklistItem = function (newItem, task) {
         this.taskService.addChecklistItemToTask(newItem, task);

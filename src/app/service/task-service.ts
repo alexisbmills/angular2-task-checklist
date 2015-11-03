@@ -51,6 +51,7 @@ export class TaskService {
   getTaskChecklist(task: Task) {
     console.log('getting list for task id: ' + task.id);
     return this.checklistItems.filter(function(value: ChecklistItem, index: number, array: ChecklistItem[]) {
+      console.log('showing ' + value.name);
       return (value.taskId == task.id);
     });
   }
