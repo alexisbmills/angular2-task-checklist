@@ -1,7 +1,7 @@
-<div *ng-for="#task of taskService.getActiveTasks()" [ng-class]="getSelectedClass(task)">
+<div *ng-for="#task of taskService.getActiveTasks()">
         <div class="row task">
-                <div class="col-md-8 name">
-                        <input type="text" class="typl8-gamma form-control edit-task" [(ng-model)]="task.name" min-length="1" *ng-if="editingTask === task">
+                <div class="col-md-8" [ng-class]="getSelectedClass(task)">
+                        <input type="text" class="form-control edit-task" [(ng-model)]="task.name" min-length="1" *ng-if="editingTask === task">
                         <span class="task-name typl8-gamma" *ng-if="editingTask !== task" (click)="onViewChecklist(task)">{{task.name}}</span>
                 </div>
                 <div class="col-md-4 actions">
@@ -15,16 +15,5 @@
                         </span>
                 </div>
         </div>
-</div>
-<div *ng-if="viewingTask !== null">
-        <div class="row add-item">
-                <div class="col-md-4">
-                        <input class="typl8-gamma form-control" min-length="1" [(ng-model)]="newItem.name" (keyup.enter)="onAddChecklistItem(newItem, viewingTask)"
-                        placeholder="Add a new task">
-                </div>
-                <div class="col-md-4">
-                        <button class="btn btn-primary" (click)="onAddChecklistItem(newItem, viewingTask)">Add new item</button>
-                </div>
-        </div>
-        <checklist [checklist]="taskService.getTaskChecklist(viewingTask)"></checklist>
+        <checklist [viewing-task]="viewingTask" *ng-if="viewingTask === task"></checklist>
 </div>

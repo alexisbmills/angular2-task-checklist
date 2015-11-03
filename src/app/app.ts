@@ -41,7 +41,7 @@ import {TaskService} from './service/task-service';
     `,
     directives: [CORE_DIRECTIVES, FORM_DIRECTIVES, TaskListComponent],
     styles: [`
-        .tasks {padding: 0; width: 100%; color: #454545; }        
+        .tasks { color: #454545; }        
         .selected { color: #369; }
     `],
 })

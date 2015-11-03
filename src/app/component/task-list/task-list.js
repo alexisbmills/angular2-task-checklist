@@ -10,16 +10,17 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var angular2_1 = require('angular2/angular2');
-var checklist_item_1 = require('../../entity/checklist-item');
 var checklist_1 = require('../checklist/checklist');
 var task_service_1 = require('../../service/task-service');
 var TaskListComponent = (function () {
     function TaskListComponent(taskService) {
         this.taskService = taskService;
-        this.resetNewItem();
     }
     TaskListComponent.prototype.getSelectedClass = function (task) {
         return { 'selected': task === this.editingTask };
+    };
+    TaskListComponent.prototype.getChecklistClass = function (task) {
+        return { 'checklist-selected': task === this.viewingTask };
     };
     TaskListComponent.prototype.onEditTask = function (task) {
         this.editingTask = task;
@@ -39,16 +40,6 @@ var TaskListComponent = (function () {
         console.log('viewing task id: ' + task.id);
         this.viewingTask = task;
     };
-    TaskListComponent.prototype.onAddChecklistItem = function (newItem, task) {
-        this.taskService.addChecklistItemToTask(newItem, task);
-        this.resetNewItem();
-    };
-    TaskListComponent.prototype.resetNewItem = function () {
-        this.newItem = new checklist_item_1.ChecklistItem();
-        this.newItem.name = null;
-        this.newItem.isDeleted = false;
-        this.newItem.isChecked = false;
-    };
     TaskListComponent = __decorate([
         angular2_1.Component({
             selector: 'task-list',
@@ -57,7 +48,7 @@ var TaskListComponent = (function () {
         angular2_1.View({
             templateUrl: 'app/component/task-list/task-list.html',
             directives: [angular2_1.CORE_DIRECTIVES, angular2_1.FORM_DIRECTIVES, checklist_1.CheckListComponent],
-            styles: ["\n        .task { padding: .8em 0; border-bottom: 1px solid #eee;}\n        .task .name { position: relative; }\n        .task .name { cursor: pointer; display: inline-block;  position: relative; left: 0; transition: all 0.2s ease; }\n        .task .name:hover {color: #369; left: .2em; }\n        .selected { color: #369; }\n    "]
+            styles: ["\n        .task { padding: .8em 0; border-bottom: 1px solid #eee;}\n        .task .task-name { position: relative; }\n        .task .task-name { cursor: pointer; display: inline-block;  position: relative; left: 0; transition: all 0.2s ease; }\n        .task .task-name:hover {color: #369; left: .2em; }\n        .selected { color: #369; }\n        .checklist-base { visibility: hidden; opacity: 0;  transition: all 0.2s ease;}\n        .checklist-selected { visibility: visible; opacity: 1; }\n    "]
         }), 
         __metadata('design:paramtypes', [task_service_1.TaskService])
     ], TaskListComponent);

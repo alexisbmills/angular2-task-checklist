@@ -1,18 +1,28 @@
-<div class="row checklist-item" *ng-for="#item of checklist" [ng-class]="getSelectedClass(item)">
-	<div class="col-md-8 name">
-		<!--<input type="text" class="typl8-gamma form-control edit-item" *ng-if="selectedItem === item" [(ngModel)]="{{item.name}}"
-		min-length="1">
-		<span class="name typl8-gamma" *ng-if="selectedItem !== item" (click)="onCheck(item)">{{item.name}}</span>-->
-		sjsjssj
+<div class="checklist">
+	<div class="row add-item">
+		<div class="col-md-8">
+			<input class="form-control" min-length="1" [(ng-model)]="newItem.name" (keyup.enter)="onAddChecklistItem(newItem, viewingTask)"
+			placeholder="Add a new task">
+		</div>
+		<div class="col-md-4">
+			<button class="btn btn-primary" (click)="onAddChecklistItem(newItem, viewingTask)">Add new item</button>
+		</div>
 	</div>
-	<div class="col-md-4 actions">
-		<span *ng-if="selectedItem === item">
-			<button class="btn btn-default" (click)="onSaveItem(item)">Save</button>
-        	<button class="btn btn-default" (click)="onCancelSaveItem(item)">Cancel</button>
-		</span>
-		<span *ng-if="selectedItem !== item">
-            <button class="btn btn-default" (click)="onEditItem(item)">Edit</button>
-            <button class="btn btn-default" (click)="onDeleteItem(item)">Delete</button>
-		</span>
+	<div class="row checklist-item" *ng-for="#item of taskService.getTaskChecklist(viewingTask)" [ng-class]="getSelectedClass(item)">
+		<div class="col-md-8 name">
+			<input type="text" class="form-control edit-item" *ng-if="selectedItem === item" [(ng-model)]="item.name" (keyup.enter)="onSaveItem(item)"
+			min-length="1">
+			<span class="name typl8-delta" *ng-if="selectedItem !== item" (click)="onCheck(item)" [ng-class]="getCheckedClass(item)">{{item.name}}</span>
+		</div>
+		<div class="col-md-4 actions">
+			<span *ng-if="selectedItem === item">
+				<button class="btn btn-default" (click)="onSaveItem(item)">Save</button>
+				<button class="btn btn-default" (click)="onCancelSaveItem(item)">Cancel</button>
+			</span>
+			<span *ng-if="selectedItem !== item">
+				<button class="btn btn-default" (click)="onEditItem(item)">Edit</button>
+				<button class="btn btn-default" (click)="onDeleteItem(item)">Delete</button>
+			</span>
+		</div>
 	</div>
 </div>

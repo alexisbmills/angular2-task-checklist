@@ -13,21 +13,24 @@ import {TaskService} from '../../service/task-service';
     directives: [CORE_DIRECTIVES, FORM_DIRECTIVES, CheckListComponent],
     styles: [`
         .task { padding: .8em 0; border-bottom: 1px solid #eee;}
-        .task .name { position: relative; }
-        .task .name { cursor: pointer; display: inline-block;  position: relative; left: 0; transition: all 0.2s ease; }
-        .task .name:hover {color: #369; left: .2em; }
+        .task .task-name { position: relative; }
+        .task .task-name { cursor: pointer; display: inline-block;  position: relative; left: 0; transition: all 0.2s ease; }
+        .task .task-name:hover {color: #369; left: .2em; }
         .selected { color: #369; }
+        .checklist-base { visibility: hidden; opacity: 0;  transition: all 0.2s ease;}
+        .checklist-selected { visibility: visible; opacity: 1; }
     `]
 })
 export class TaskListComponent {
     editingTask: Task;
     viewingTask: Task;
-    newItem: ChecklistItem;
     constructor(public taskService: TaskService) {
-        this.resetNewItem();
     }
     getSelectedClass(task: Task) {
         return { 'selected': task === this.editingTask };
+    }
+    getChecklistClass(task: Task) {
+        return { 'checklist-selected': task === this.viewingTask };        
     }
     onEditTask(task: Task) {
         this.editingTask = task;
@@ -46,15 +49,5 @@ export class TaskListComponent {
     onViewChecklist(task: Task) {
         console.log('viewing task id: ' + task.id);
         this.viewingTask = task;
-    }
-    onAddChecklistItem(newItem, task: Task) {
-        this.taskService.addChecklistItemToTask(newItem, task);
-        this.resetNewItem();
-    }
-    resetNewItem() {        
-        this.newItem = new ChecklistItem();
-        this.newItem.name = null;
-        this.newItem.isDeleted = false;
-        this.newItem.isChecked = false;
     }
 }
