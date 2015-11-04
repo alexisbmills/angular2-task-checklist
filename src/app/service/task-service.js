@@ -30,8 +30,19 @@ var TaskService = (function () {
         this.checklistItems = CHECKLIST_ITEMS;
     }
     TaskService.prototype.getActiveTasks = function () {
-        return this.tasks.filter(function (value, index, array) {
+        return this
+            .tasks
+            .filter(function (value, index, array) {
             return (value.isDeleted === false);
+        })
+            .sort(function (a, b) {
+            if (a.id > b.id) {
+                return -1;
+            }
+            if (a.id < b.id) {
+                return 1;
+            }
+            return 0;
         });
     };
     TaskService.prototype.addTask = function (newTask) {
@@ -53,10 +64,21 @@ var TaskService = (function () {
         });
         editedTask = task;
     };
-    TaskService.prototype.getTaskChecklist = function (task) {
+    TaskService.prototype.getTaskActiveChecklist = function (task) {
         console.log('getting list for task id: ' + task.id);
-        return this.checklistItems.filter(function (value, index, array) {
-            return (value.taskId == task.id);
+        return this
+            .checklistItems
+            .filter(function (value, index, array) {
+            return (value.taskId == task.id && false === value.isDeleted);
+        })
+            .sort(function (a, b) {
+            if (a.id > b.id) {
+                return -1;
+            }
+            if (a.id < b.id) {
+                return 1;
+            }
+            return 0;
         });
     };
     TaskService.prototype.addChecklistItemToTask = function (newChecklistItem, task) {

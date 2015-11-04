@@ -15,9 +15,17 @@ var task_service_1 = require('../../service/task-service');
 var TaskListComponent = (function () {
     function TaskListComponent(taskService) {
         this.taskService = taskService;
+        this.editingTask = null;
+        this.viewingTask = null;
     }
     TaskListComponent.prototype.getSelectedClass = function (task) {
-        return { 'selected': task === this.editingTask };
+        return { 'selected': task === this.editingTask || task === this.viewingTask };
+    };
+    TaskListComponent.prototype.getLowerFocusClass = function (task) {
+        return { 'sub-focus': task !== this.viewingTask && null !== this.viewingTask };
+    };
+    TaskListComponent.prototype.getFirstRowClass = function (index) {
+        return { 'first': index === 0 };
     };
     TaskListComponent.prototype.getChecklistClass = function (task) {
         return { 'checklist-selected': task === this.viewingTask };
@@ -37,7 +45,10 @@ var TaskListComponent = (function () {
         }
     };
     TaskListComponent.prototype.onViewChecklist = function (task) {
-        console.log('viewing task id: ' + task.id);
+        if (task === this.viewingTask) {
+            this.viewingTask = null;
+            return;
+        }
         this.viewingTask = task;
     };
     TaskListComponent = __decorate([
@@ -48,7 +59,7 @@ var TaskListComponent = (function () {
         angular2_1.View({
             templateUrl: 'app/component/task-list/task-list.html',
             directives: [angular2_1.CORE_DIRECTIVES, angular2_1.FORM_DIRECTIVES, checklist_1.CheckListComponent],
-            styles: ["\n        .task { padding: .8em 0; border-bottom: 1px solid #eee;}\n        .task .task-name { position: relative; }\n        .task .task-name { cursor: pointer; display: inline-block;  position: relative; left: 0; transition: all 0.2s ease; }\n        .task .task-name:hover {color: #369; left: .2em; }\n        .selected { color: #369; }\n        .checklist-base { visibility: hidden; opacity: 0;  transition: all 0.2s ease;}\n        .checklist-selected { visibility: visible; opacity: 1; }\n    "]
+            styles: ["\n        .tasks { color: #454545; }   \n        .task { padding: .8em 0; border-top: 1px solid #eee;}\n        .task.first { border-top: 0; } \n        .task .sub-focus { color: #d7d7d7;}\n        .task .task-name { position: relative; }\n        .task .task-name { cursor: pointer; display: inline-block;  position: relative; left: 0; transition: all 0.2s ease; }\n        .task .task-name:hover {color: #369; left: .2em; }\n        .selected { color: #369; }\n        .checklist-base { visibility: hidden; opacity: 0;  transition: all 0.2s ease;}\n        .checklist-selected { visibility: visible; opacity: 1; }\n    "]
         }), 
         __metadata('design:paramtypes', [task_service_1.TaskService])
     ], TaskListComponent);

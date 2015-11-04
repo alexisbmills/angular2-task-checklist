@@ -1,19 +1,22 @@
-<div *ng-for="#task of taskService.getActiveTasks()">
-        <div class="row task">
-                <div class="col-md-8" [ng-class]="getSelectedClass(task)">
-                        <input type="text" class="form-control edit-task" [(ng-model)]="task.name" min-length="1" *ng-if="editingTask === task">
-                        <span class="task-name typl8-gamma" *ng-if="editingTask !== task" (click)="onViewChecklist(task)">{{task.name}}</span>
+<div class="tasks">
+        <div *ng-for="#task of taskService.getActiveTasks(); #taskIndex = index">       
+                <div class="row task" [ng-class]="getFirstRowClass(taskIndex)">
+                        <div class="col-md-8" [ng-class]="getSelectedClass(task)">
+                                <input type="text" class="form-control edit-task" [(ng-model)]="task.name" min-length="1" *ng-if="editingTask === task"">
+                                <span class="task-name typl8-gamma" *ng-if="editingTask !== task" 
+                                [ng-class]="getLowerFocusClass(task)" (click)="onViewChecklist(task)">{{task.name}}</span>
+                        </div>
+                        <div class="col-md-4 actions">
+                                <span *ng-if="editingTask === task">
+                                        <button class="btn btn-default" (click)="onSaveTask(task)">Save</button>
+                                        <button class="btn btn-default" (click)="onCancelSaveTask(task)">Cancel</button>
+                                </span>
+                                <span *ng-if="editingTask !== task">
+                                        <button class="btn btn-default" (click)="onEditTask(task)">Edit</button>
+                                        <button class="btn btn-default" (click)="onDeleteTask(task)">Delete</button>
+                                </span>
+                        </div>
                 </div>
-                <div class="col-md-4 actions">
-                        <span *ng-if="editingTask === task">
-                                <button class="btn btn-default" (click)="onSaveTask(task)">Save</button>
-                                <button class="btn btn-default" (click)="onCancelSaveTask(task)">Cancel</button>
-                        </span>
-                        <span *ng-if="editingTask !== task">
-                                <button class="btn btn-default" (click)="onEditTask(task)">Edit</button>
-                                <button class="btn btn-default" (click)="onDeleteTask(task)">Delete</button>
-                        </span>
-                </div>
+                <checklist [viewing-task]="viewingTask" *ng-if="viewingTask === task"></checklist>
         </div>
-        <checklist [viewing-task]="viewingTask" *ng-if="viewingTask === task"></checklist>
-</div>
+</div>        

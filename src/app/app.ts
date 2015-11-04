@@ -17,32 +17,27 @@ import {TaskService} from './service/task-service';
             <div class="row">
                 <div class="col-md-12">
                     <h2>My Tasks</h2>  
-                    <div class="row add-task">                    
-                        <div class="col-md-4">                
+                    <div class="form-inline">
+                        <div class="form-group new-entity">           
                             <input
-                                class="typl8-gamma form-control"
+                                class="form-control"
                                 min-length="1"
                                 [(ng-model)]="newTask.name" 
                                 (keyup.enter)="onAddTask(newTask)" 
-                                placeholder="Add a new task">
-                            </div>               
-                        <div class="col-md-4">      
-                            <button class="btn btn-primary" (click)="onAddTask(newTask)">Add new Task</button>
+                                placeholder="What are your tasks?">
                         </div>
+                        <button class="btn btn-primary" (click)="onAddTask(newTask)">Add new task</button>
                     </div>
                 </div>
             </div>              
-            <div class="tasks row">
-                <div class="col-md-12">                 
-                    <task-list></task-list>
-                </div>
-            </div> 
+            <task-list></task-list>                
         </section>
     `,
     directives: [CORE_DIRECTIVES, FORM_DIRECTIVES, TaskListComponent],
-    styles: [`
-        .tasks { color: #454545; }        
+    styles: [`     
         .selected { color: #369; }
+        .new-entity { padding-top: 1em; padding-bottom: 1em; }
+        .new-entity input { width: 30em;}
     `],
 })
 class AppComponent {

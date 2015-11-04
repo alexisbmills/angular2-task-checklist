@@ -36,11 +36,16 @@ var CheckListComponent = (function () {
     CheckListComponent.prototype.onEditItem = function (item) {
         this.selectedItem = item;
     };
+    CheckListComponent.prototype.onCancelSaveItem = function () {
+        this.selectedItem = null;
+    };
     CheckListComponent.prototype.onSaveItem = function (item) {
         this.selectedItem = null;
     };
     CheckListComponent.prototype.onDeleteItem = function (item) {
-        this.taskService.toggleDeleted(item);
+        if (confirm('Delete this item?')) {
+            this.taskService.toggleDeleted(item);
+        }
     };
     CheckListComponent.prototype.onCheck = function (item) {
         this.taskService.toggleChecked(item);
@@ -54,7 +59,7 @@ var CheckListComponent = (function () {
         angular2_1.View({
             templateUrl: 'app/component/checklist/checklist.html',
             directives: [angular2_1.CORE_DIRECTIVES, angular2_1.FORM_DIRECTIVES],
-            styles: ["\n        .checklist { padding-top: .2em; padding-bottom: .2em; background-color: #e1e1e1; }\n        .checklist .checklist-item { padding: .8em 0; border-bottom: 1px solid #eee;}\n        .checklist .checklist-item .name { position: relative; }\n        .checklist .checklist-item .name { cursor: pointer; display: inline-block;  position: relative; left: 0; transition: all 0.2s ease; }\n        .checklist .checklist-item .name:hover {color: #369; left: .2em; }\n        .checklist .selected { color: #369; }\n        .checklist .checked { text-decoration: line-through; color: #555 }\n    "]
+            styles: ["\n        .checklist {  } \n        .checklist .title { color: #2FA4E7; }\n        .checklist .new-entity { padding-top: 1em; padding-bottom: 1em; }\n        .checklist .new-entity input { width: 30em;}\n        .checklist .checklist-item { color: #317EAC; padding: .8em 0;}\n        .checklist .checklist-item .name { position: relative; cursor: pointer; display: inline-block; }\n        .checklist .checklist-item .name:hover {color: #369;}\n        .checklist .selected { color: #369; }\n        .checklist .checked { text-decoration: line-through; color: #555 }\n    "]
         }), 
         __metadata('design:paramtypes', [task_service_1.TaskService])
     ], CheckListComponent);
