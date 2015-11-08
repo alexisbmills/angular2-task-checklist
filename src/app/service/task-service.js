@@ -65,7 +65,6 @@ var TaskService = (function () {
         editedTask = task;
     };
     TaskService.prototype.getTaskActiveChecklist = function (task) {
-        console.log('getting list for task id: ' + task.id);
         return this
             .checklistItems
             .filter(function (value, index, array) {
@@ -101,7 +100,15 @@ var TaskService = (function () {
     TaskService.prototype.toggleDeleted = function (deletable) {
         deletable.isDeleted = !deletable.isDeleted;
     };
+    /**
+     * Simulate incrementing ID
+     *
+     * @return number
+     */
     TaskService.prototype.getNextId = function (collection) {
+        if (0 === collection.length) {
+            return 1;
+        }
         var maxId = Math
             .max
             .apply(null, collection.map(function (item) {

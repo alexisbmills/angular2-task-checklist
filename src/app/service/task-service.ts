@@ -20,10 +20,12 @@ var CHECKLIST_ITEMS: ChecklistItem[] = [
 export class TaskService {
   tasks: Task[];
   checklistItems: ChecklistItem[];
+
   constructor() {
     this.tasks = TASKS;
     this.checklistItems = CHECKLIST_ITEMS;
   }
+
   getActiveTasks() {
     return this
       .tasks
@@ -40,6 +42,7 @@ export class TaskService {
         return 0;
       });
   }
+
   addTask(newTask) {
     if (!newTask.name) {
       return;
@@ -52,6 +55,7 @@ export class TaskService {
     this.tasks.push(task);
     newTask.value = null;
   }
+
   saveTask(task: Task) {
     var editedTask: Task;
     editedTask = this.tasks.find(function(value: Task, index: number, array: Task[]) {
@@ -59,8 +63,8 @@ export class TaskService {
     });
     editedTask = task;
   }
+
   getTaskActiveChecklist(task: Task) {
-    console.log('getting list for task id: ' + task.id);
     return this
       .checklistItems
       .filter(function(value: ChecklistItem, index: number, array: ChecklistItem[]) {
@@ -76,6 +80,7 @@ export class TaskService {
         return 0;
       });
   }
+
   addChecklistItemToTask(newChecklistItem, task: Task) {
     if (!newChecklistItem.name) {
       return;
@@ -90,13 +95,24 @@ export class TaskService {
     this.checklistItems.push(checklistItem);
     newChecklistItem.value = null;
   }
+
   toggleChecked(checklistItem: ChecklistItem) {
     checklistItem.isChecked = !checklistItem.isChecked;
   }
+
   toggleDeleted(deletable: Deleteable) {
     deletable.isDeleted = !deletable.isDeleted;
   }
-  getNextId(collection) {
+
+  /**
+   * Simulate incrementing ID
+   *
+   * @return number
+   */
+  getNextId(collection): number {
+    if (0 === collection.length) {
+      return 1;
+    }
     var maxId = Math
       .max
       .apply(null, collection.map(function(item) {

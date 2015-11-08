@@ -1,0 +1,29 @@
+.checklist .title {
+	color: #2FA4E7;
+}
+.checklist .new-entity {
+	padding-top: 1em;
+	padding-bottom: 1em;
+}
+.checklist .new-entity input {
+	width: 30em;
+}
+.checklist .checklist-item {
+	color: #317EAC;
+	padding: .8em 0;
+}
+.checklist .checklist-item .name {
+	position: relative;
+	cursor: pointer;
+	display: inline-block;
+}
+.checklist .checklist-item .name:hover {
+	color: #369;
+}
+.checklist .selected {
+	color: #369;
+}
+.checklist .checked {
+	text-decoration: line-through;
+	color: #555
+}

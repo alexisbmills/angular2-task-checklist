@@ -11,17 +11,7 @@ import {TaskService} from '../../service/task-service';
 @View({
     templateUrl: 'app/component/checklist/checklist.html',
     directives: [CORE_DIRECTIVES, FORM_DIRECTIVES],
-    styles: [`
-        .checklist {  } 
-        .checklist .title { color: #2FA4E7; }
-        .checklist .new-entity { padding-top: 1em; padding-bottom: 1em; }
-        .checklist .new-entity input { width: 30em;}
-        .checklist .checklist-item { color: #317EAC; padding: .8em 0;}
-        .checklist .checklist-item .name { position: relative; cursor: pointer; display: inline-block; }
-        .checklist .checklist-item .name:hover {color: #369;}
-        .checklist .selected { color: #369; }
-        .checklist .checked { text-decoration: line-through; color: #555 }
-    `]
+    styleUrls: ['app/component/checklist/checklist.css']
 })
 export class CheckListComponent {
     viewingTask: Task;
@@ -36,7 +26,7 @@ export class CheckListComponent {
     getCheckedClass(item: ChecklistItem) {
         return { 'checked': item.isChecked };
     }
-    resetNewItem() {        
+    resetNewItem() {
         this.newItem = new ChecklistItem();
         this.newItem.name = null;
         this.newItem.isDeleted = false;

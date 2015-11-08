@@ -59,7 +59,7 @@ var TaskListComponent = (function () {
         angular2_1.View({
             templateUrl: 'app/component/task-list/task-list.html',
             directives: [angular2_1.CORE_DIRECTIVES, angular2_1.FORM_DIRECTIVES, checklist_1.CheckListComponent],
-            styles: ["\n        .tasks { color: #454545; }   \n        .task { padding: .8em 0; border-top: 1px solid #eee;}\n        .task.first { border-top: 0; } \n        .task .sub-focus { color: #d7d7d7;}\n        .task .task-name { position: relative; }\n        .task .task-name { cursor: pointer; display: inline-block;  position: relative; left: 0; transition: all 0.2s ease; }\n        .task .task-name:hover {color: #369; left: .2em; }\n        .selected { color: #369; }\n        .checklist-base { visibility: hidden; opacity: 0;  transition: all 0.2s ease;}\n        .checklist-selected { visibility: visible; opacity: 1; }\n    "]
+            styleUrls: ['app/component/task-list/task-list.css']
         }), 
         __metadata('design:paramtypes', [task_service_1.TaskService])
     ], TaskListComponent);

@@ -1,0 +1,30 @@
+.tasks { 
+	color: #454545; 
+}   
+.task { 
+	padding: .8em 0;
+	border-top: 1px solid #eee;
+}
+.task.first { 
+	border-top: 0;
+} 
+.task .sub-focus { 
+	color: #d7d7d7;
+}
+.task .task-name { 
+	position: relative;
+}
+.task .task-name { 
+	cursor: pointer;
+	display: inline-block;
+	position: relative;
+	left: 0;
+	transition: all 0.2s ease;
+}
+.task .task-name:hover {	
+	color: #369;
+ 	left: .2em;
+}
+.selected { 
+	color: #369;
+}

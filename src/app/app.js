@@ -34,9 +34,9 @@ var AppComponent = (function () {
             bindings: [task_service_1.TaskService]
         }),
         angular2_1.View({
-            template: "\n        <section>\n            <div class=\"row\">\n                <div class=\"col-md-12\">\n                    <h1>{{title}}</h1>\n                </div>\n            </div>\n            <div class=\"row\">\n                <div class=\"col-md-12\">\n                    <h2>My Tasks</h2>  \n                    <div class=\"form-inline\">\n                        <div class=\"form-group new-entity\">           \n                            <input\n                                class=\"form-control\"\n                                min-length=\"1\"\n                                [(ng-model)]=\"newTask.name\" \n                                (keyup.enter)=\"onAddTask(newTask)\" \n                                placeholder=\"What are your tasks?\">\n                        </div>\n                        <button class=\"btn btn-primary\" (click)=\"onAddTask(newTask)\">Add new task</button>\n                    </div>\n                </div>\n            </div>              \n            <task-list></task-list>                \n        </section>\n    ",
+            templateUrl: 'app/app.html',
             directives: [angular2_1.CORE_DIRECTIVES, angular2_1.FORM_DIRECTIVES, task_list_1.TaskListComponent],
-            styles: ["     \n        .selected { color: #369; }\n        .new-entity { padding-top: 1em; padding-bottom: 1em; }\n        .new-entity input { width: 30em;}\n    "],
+            styles: ["\n        .new-entity { padding-top: 1em; padding-bottom: 1em; }\n        .new-entity input { width: 30em;}\n    "],
         }), 
         __metadata('design:paramtypes', [task_service_1.TaskService])
     ], AppComponent);

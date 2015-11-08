@@ -1,0 +1,24 @@
+<section>
+	<div class="row">
+		<div class="col-md-12">
+			<h1>{{title}}</h1>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			<h2>My Tasks</h2>  
+			<div class="form-inline">
+				<div class="form-group new-entity">           
+					<input
+						class="form-control"
+						min-length="1"
+						[(ng-model)]="newTask.name" 
+						(keyup.enter)="onAddTask(newTask)" 
+						placeholder="What are your tasks?">
+				</div>
+				<button class="btn btn-primary" (click)="onAddTask(newTask)">Add new task</button>
+			</div>
+		</div>
+	</div>              
+	<task-list></task-list>                
+</section>

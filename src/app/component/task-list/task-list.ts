@@ -11,18 +11,7 @@ import {TaskService} from '../../service/task-service';
 @View({
     templateUrl: 'app/component/task-list/task-list.html',
     directives: [CORE_DIRECTIVES, FORM_DIRECTIVES, CheckListComponent],
-    styles: [`
-        .tasks { color: #454545; }   
-        .task { padding: .8em 0; border-top: 1px solid #eee;}
-        .task.first { border-top: 0; } 
-        .task .sub-focus { color: #d7d7d7;}
-        .task .task-name { position: relative; }
-        .task .task-name { cursor: pointer; display: inline-block;  position: relative; left: 0; transition: all 0.2s ease; }
-        .task .task-name:hover {color: #369; left: .2em; }
-        .selected { color: #369; }
-        .checklist-base { visibility: hidden; opacity: 0;  transition: all 0.2s ease;}
-        .checklist-selected { visibility: visible; opacity: 1; }
-    `]
+    styleUrls: ['app/component/task-list/task-list.css']
 })
 export class TaskListComponent {
     editingTask: Task;
@@ -41,7 +30,7 @@ export class TaskListComponent {
         return { 'first': index === 0 };
     }
     getChecklistClass(task: Task) {
-        return { 'checklist-selected': task === this.viewingTask };        
+        return { 'checklist-selected': task === this.viewingTask };
     }
     onEditTask(task: Task) {
         this.editingTask = task;
