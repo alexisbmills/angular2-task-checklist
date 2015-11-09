@@ -29,3 +29,19 @@ Run tests with Jasmine
 ```
 npm test
 ```
+
+## Resources
+The following resources have been ever so helpful:
+
+Angular.IO
+- Quickstart, tutorials, and docs https://angular.io/docs/ts/latest/quickstart.html
+
+Victor Savkin's Blog
+- Core concepts http://victorsavkin.com/post/118372404541/the-core-concepts-of-angular-2
+- Template syntax http://victorsavkin.com/post/119943127151/angular-2-template-syntax
+
+thoughtram Blog
+- Template syntax http://blog.thoughtram.io/angular/2015/08/11/angular-2-template-syntax-demystified-part-1.html
+
+Angular2 Seed
+- Full blown project starter https://github.com/mgechev/angular2-seed
