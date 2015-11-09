@@ -10,25 +10,18 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var angular2_1 = require('angular2/angular2');
-var TASKS = [
-    { "id": 11, "name": "Grocery Shopping", isDeleted: false },
-    { "id": 12, "name": "Football game on Wednesday", isDeleted: false },
-    { "id": 13, "name": "Fix bathroom tap", isDeleted: false }
-];
-var CHECKLIST_ITEMS = [
-    { "id": 11, "taskId": 11, "name": "Milk", isChecked: false, isDeleted: false },
-    { "id": 12, "taskId": 11, "name": "Apples", isChecked: false, isDeleted: false },
-    { "id": 13, "taskId": 11, "name": "Oranges", isChecked: false, isDeleted: false },
-    { "id": 14, "taskId": 12, "name": "Buy tickets", isChecked: false, isDeleted: false },
-    { "id": 15, "taskId": 12, "name": "Call James to arrange pickup", isChecked: false, isDeleted: false },
-    { "id": 16, "taskId": 12, "name": "Invite Stefan", isChecked: false, isDeleted: false },
-    { "id": 17, "taskId": 13, "name": "Call James to arrange pickup", isChecked: false, isDeleted: false }
-];
+var TASKS = [];
+var CHECKLIST_ITEMS = [];
 var TaskService = (function () {
     function TaskService() {
         this.tasks = TASKS;
         this.checklistItems = CHECKLIST_ITEMS;
     }
+    /**
+     * Get all non-deleted tasks
+     *
+     * @return Task[]
+     */
     TaskService.prototype.getActiveTasks = function () {
         return this
             .tasks
@@ -45,6 +38,12 @@ var TaskService = (function () {
             return 0;
         });
     };
+    /**
+     * Add a new task
+     *
+     * @param Object new task - do this better
+     * @return TaskService
+     */
     TaskService.prototype.addTask = function (newTask) {
         if (!newTask.name) {
             return;
@@ -56,14 +55,27 @@ var TaskService = (function () {
         };
         this.tasks.push(task);
         newTask.value = null;
+        return this;
     };
+    /**
+     * Save a task
+     *
+     * @return TaskService
+     */
     TaskService.prototype.saveTask = function (task) {
         var editedTask;
         editedTask = this.tasks.find(function (value, index, array) {
             return (value.id == task.id);
         });
         editedTask = task;
+        return this;
     };
+    /**
+     * Get non-deleted checklist items for a task
+     *
+     * @param Task
+     *
+     */
     TaskService.prototype.getTaskActiveChecklist = function (task) {
         return this
             .checklistItems

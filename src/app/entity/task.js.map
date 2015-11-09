@@ -1,1 +1,1 @@
-{"version":3,"file":"task.js","sourceRoot":"","sources":["task.ts"],"names":["Task","Task.constructor"],"mappings":"AAAA;IAAAA;IAIAC,CAACA;IAADD,WAACA;AAADA,CAACA,AAJD,IAIC;AAJY,YAAI,OAIhB,CAAA"}
+{"version":3,"file":"task.js","sourceRoot":"","sources":["task.ts"],"names":["Task","Task.constructor"],"mappings":"AAAA;IAKIA;QACIC,IAAIA,CAACA,SAASA,GAAGA,KAAKA,CAACA;IAC3BA,CAACA;IACLD,WAACA;AAADA,CAACA,AARD,IAQC;AARY,YAAI,OAQhB,CAAA"}

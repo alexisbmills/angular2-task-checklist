@@ -4,4 +4,9 @@ export class ChecklistItem implements Deleteable {
     name: string;
     isChecked: boolean;
     isDeleted: boolean;
+
+    constructor() {
+        this.isChecked = false;
+        this.isDeleted = false;
+    }
 }

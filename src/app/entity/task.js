@@ -1,5 +1,6 @@
 var Task = (function () {
     function Task() {
+        this.isDeleted = false;
     }
     return Task;
 })();

@@ -1,20 +1,20 @@
-import {Injectable, bootstrap} from 'angular2/angular2'
+import {Injectable, bootstrap} from 'angular2/angular2';
 import {Task} from '../entity/task';
 import {ChecklistItem} from '../entity/checklist-item';
 
 var TASKS: Task[] = [
-  { "id": 11, "name": "Grocery Shopping", isDeleted: false },
-  { "id": 12, "name": "Football game on Wednesday", isDeleted: false },
-  { "id": 13, "name": "Fix bathroom tap", isDeleted: false }
+  // { "id": 11, "name": "Grocery Shopping", isDeleted: false },
+  // { "id": 12, "name": "Football game on Wednesday", isDeleted: false },
+  // { "id": 13, "name": "Fix bathroom tap", isDeleted: false }
 ];
 var CHECKLIST_ITEMS: ChecklistItem[] = [
-  { "id": 11, "taskId": 11, "name": "Milk", isChecked: false, isDeleted: false },
-  { "id": 12, "taskId": 11, "name": "Apples", isChecked: false, isDeleted: false },
-  { "id": 13, "taskId": 11, "name": "Oranges", isChecked: false, isDeleted: false },
-  { "id": 14, "taskId": 12, "name": "Buy tickets", isChecked: false, isDeleted: false },
-  { "id": 15, "taskId": 12, "name": "Call James to arrange pickup", isChecked: false, isDeleted: false },
-  { "id": 16, "taskId": 12, "name": "Invite Stefan", isChecked: false, isDeleted: false },
-  { "id": 17, "taskId": 13, "name": "Call James to arrange pickup", isChecked: false, isDeleted: false }
+  // { "id": 11, "taskId": 11, "name": "Milk", isChecked: false, isDeleted: false },
+  // { "id": 12, "taskId": 11, "name": "Apples", isChecked: false, isDeleted: false },
+  // { "id": 13, "taskId": 11, "name": "Oranges", isChecked: false, isDeleted: false },
+  // { "id": 14, "taskId": 12, "name": "Buy tickets", isChecked: false, isDeleted: false },
+  // { "id": 15, "taskId": 12, "name": "Call James to arrange pickup", isChecked: false, isDeleted: false },
+  // { "id": 16, "taskId": 12, "name": "Invite Stefan", isChecked: false, isDeleted: false },
+  // { "id": 17, "taskId": 13, "name": "Call James to arrange pickup", isChecked: false, isDeleted: false }
 ]
 @Injectable()
 export class TaskService {
@@ -26,6 +26,11 @@ export class TaskService {
     this.checklistItems = CHECKLIST_ITEMS;
   }
 
+  /**
+   * Get all non-deleted tasks
+   *
+   * @return Task[]
+   */
   getActiveTasks() {
     return this
       .tasks
@@ -43,6 +48,12 @@ export class TaskService {
       });
   }
 
+  /**
+   * Add a new task
+   *
+   * @param Object new task - do this better
+   * @return TaskService
+   */
   addTask(newTask) {
     if (!newTask.name) {
       return;
@@ -54,16 +65,29 @@ export class TaskService {
     }
     this.tasks.push(task);
     newTask.value = null;
+    return this;
   }
 
+  /**
+   * Save a task
+   *
+   * @return TaskService
+   */
   saveTask(task: Task) {
     var editedTask: Task;
     editedTask = this.tasks.find(function(value: Task, index: number, array: Task[]) {
       return (value.id == task.id);
     });
     editedTask = task;
+    return this;
   }
 
+  /**
+   * Get non-deleted checklist items for a task
+   *
+   * @param Task
+   *
+   */
   getTaskActiveChecklist(task: Task) {
     return this
       .checklistItems

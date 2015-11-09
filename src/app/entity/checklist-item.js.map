@@ -1,1 +1,1 @@
-{"version":3,"file":"checklist-item.js","sourceRoot":"","sources":["checklist-item.ts"],"names":["ChecklistItem","ChecklistItem.constructor"],"mappings":"AAAA;IAAAA;IAMAC,CAACA;IAADD,oBAACA;AAADA,CAACA,AAND,IAMC;AANY,qBAAa,gBAMzB,CAAA"}
+{"version":3,"file":"checklist-item.js","sourceRoot":"","sources":["checklist-item.ts"],"names":["ChecklistItem","ChecklistItem.constructor"],"mappings":"AAAA;IAOIA;QACIC,IAAIA,CAACA,SAASA,GAAGA,KAAKA,CAACA;QACvBA,IAAIA,CAACA,SAASA,GAAGA,KAAKA,CAACA;IAC3BA,CAACA;IACLD,oBAACA;AAADA,CAACA,AAXD,IAWC;AAXY,qBAAa,gBAWzB,CAAA"}

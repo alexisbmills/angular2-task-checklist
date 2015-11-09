@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "scripts": {
     "tsc": "tsc -p src -w",
-    "start": "live-server --open=src"
+    "start": "live-server --open=src",
+    "test": "live-server --open=src/unit-tests.html"
   },
   "dependencies": {
     "angular2": "2.0.0-alpha.45",
@@ -12,7 +13,9 @@
     "ng2-bootstrap": "*"
   },
   "devDependencies": {
+    "jasmine-core": "2.3.4",
     "live-server": "^0.8.1",
+    "typedoc": "^0.3.12",
     "typescript": "^1.6.2"
   }
 }

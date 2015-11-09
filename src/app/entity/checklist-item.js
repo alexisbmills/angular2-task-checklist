@@ -1,5 +1,7 @@
 var ChecklistItem = (function () {
     function ChecklistItem() {
+        this.isChecked = false;
+        this.isDeleted = false;
     }
     return ChecklistItem;
 })();
