@@ -54,18 +54,18 @@ export class TaskService {
    * @param Object new task - do this better
    * @return TaskService
    */
-  addTask(newTask) {
+  addTask(newTask: Task) {
     if (!newTask.name) {
       return;
     }
+
     var task: Task = {
       id: this.getNextId(this.tasks),
       name: newTask.name,
-      isDeleted: false
+      isDeleted: newTask.isDeleted
     }
     this.tasks.push(task);
-    newTask.value = null;
-    return this;
+    return task;
   }
 
   /**
@@ -86,7 +86,7 @@ export class TaskService {
    * Get non-deleted checklist items for a task
    *
    * @param Task
-   *
+   * @return Task[]
    */
   getTaskActiveChecklist(task: Task) {
     return this
@@ -105,7 +105,7 @@ export class TaskService {
       });
   }
 
-  addChecklistItemToTask(newChecklistItem, task: Task) {
+  addChecklistItemToTask(newChecklistItem: ChecklistItem, task: Task) {
     if (!newChecklistItem.name) {
       return;
     }
@@ -113,11 +113,11 @@ export class TaskService {
       id: this.getNextId(this.checklistItems),
       taskId: task.id,
       name: newChecklistItem.name,
-      isChecked: false,
-      isDeleted: false
+      isChecked: newChecklistItem.isChecked,
+      isDeleted: newChecklistItem.isDeleted
     }
     this.checklistItems.push(checklistItem);
-    newChecklistItem.value = null;
+    return this;
   }
 
   toggleChecked(checklistItem: ChecklistItem) {

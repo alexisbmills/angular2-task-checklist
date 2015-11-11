@@ -51,11 +51,10 @@ var TaskService = (function () {
         var task = {
             id: this.getNextId(this.tasks),
             name: newTask.name,
-            isDeleted: false
+            isDeleted: newTask.isDeleted
         };
         this.tasks.push(task);
-        newTask.value = null;
-        return this;
+        return task;
     };
     /**
      * Save a task
@@ -74,7 +73,7 @@ var TaskService = (function () {
      * Get non-deleted checklist items for a task
      *
      * @param Task
-     *
+     * @return Task[]
      */
     TaskService.prototype.getTaskActiveChecklist = function (task) {
         return this
@@ -100,11 +99,11 @@ var TaskService = (function () {
             id: this.getNextId(this.checklistItems),
             taskId: task.id,
             name: newChecklistItem.name,
-            isChecked: false,
-            isDeleted: false
+            isChecked: newChecklistItem.isChecked,
+            isDeleted: newChecklistItem.isDeleted
         };
         this.checklistItems.push(checklistItem);
-        newChecklistItem.value = null;
+        return this;
     };
     TaskService.prototype.toggleChecked = function (checklistItem) {
         checklistItem.isChecked = !checklistItem.isChecked;

@@ -17,11 +17,13 @@
         'app': {defaultExtension: 'js'}
       }
     });
-    System.import('app/entity/task.spec')
-    System.import('app/entity/checklist-item.spec')
-    System.import('app/service/task-service.spec')
-      .then(window.onload)
-      .catch(console.error.bind(console));
+    Promise.all([
+      System.import('app/entity/task.spec'),
+      System.import('app/entity/checklist-item.spec'),
+      System.import('app/service/task-service.spec')
+    ])
+    .then(window.onload)
+    .catch(console.error.bind(console));
   </script>
 </body>
 
