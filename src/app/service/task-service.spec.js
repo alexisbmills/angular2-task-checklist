@@ -51,6 +51,12 @@ describe('TaskService', function () {
         expect(activeTasks[0].id).toBe(2);
         expect(activeTasks[1].id).toBe(1);
     });
+    it('adds a task and returns saved task with new ID', function () {
+        var newTask = new task_1.Task();
+        newTask.name = 'Run more tests';
+        var savedNewTask = taskService.addTask(newTask);
+        expect(savedNewTask.id).toBe(4);
+    });
     it('saves a task and returns self', function () {
         var firstTask = taskService.getActiveTasks()[0];
         firstTask.name = 'saved task';
@@ -70,6 +76,15 @@ describe('TaskService', function () {
         var checklistitems = taskService.getTaskActiveChecklist(firstTask);
         expect(checklistitems[0].id).toBe(2);
         expect(checklistitems[1].id).toBe(1);
+    });
+    it('adds an item to a task and returns the saved item with a new ID and the assigned task ID', function () {
+        var firstItem = new checklist_item_1.ChecklistItem();
+        firstItem.name = 'Standard item';
+        firstItem.isChecked = false;
+        var task = taskService.tasks[1];
+        var savedItem = taskService.addChecklistItemToTask(firstItem, task);
+        expect(savedItem.id).toBe(5);
+        expect(savedItem.taskId).toBe(task.id);
     });
     it('deletes a task', function () {
         var firstTask = taskService.tasks[0];

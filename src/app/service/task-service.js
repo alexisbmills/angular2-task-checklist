@@ -91,6 +91,13 @@ var TaskService = (function () {
             return 0;
         });
     };
+    /**
+     * Add an item to a task
+     *
+     * @param ChecklistItem
+     * @param Task
+     * @return ChecklistItem
+     */
     TaskService.prototype.addChecklistItemToTask = function (newChecklistItem, task) {
         if (!newChecklistItem.name) {
             return;
@@ -103,11 +110,21 @@ var TaskService = (function () {
             isDeleted: newChecklistItem.isDeleted
         };
         this.checklistItems.push(checklistItem);
-        return this;
+        return checklistItem;
     };
+    /**
+     * Toggles the checked field
+     *
+     * @param ChecklistItem
+     */
     TaskService.prototype.toggleChecked = function (checklistItem) {
         checklistItem.isChecked = !checklistItem.isChecked;
     };
+    /**
+     * Toggles the deleted field
+     *
+     * @param Deletable
+     */
     TaskService.prototype.toggleDeleted = function (deletable) {
         deletable.isDeleted = !deletable.isDeleted;
     };

@@ -105,6 +105,13 @@ export class TaskService {
       });
   }
 
+  /**
+   * Add an item to a task
+   *
+   * @param ChecklistItem
+   * @param Task
+   * @return ChecklistItem
+   */
   addChecklistItemToTask(newChecklistItem: ChecklistItem, task: Task) {
     if (!newChecklistItem.name) {
       return;
@@ -117,13 +124,23 @@ export class TaskService {
       isDeleted: newChecklistItem.isDeleted
     }
     this.checklistItems.push(checklistItem);
-    return this;
+    return checklistItem;
   }
 
+  /**
+   * Toggles the checked field
+   *
+   * @param ChecklistItem
+   */
   toggleChecked(checklistItem: ChecklistItem) {
     checklistItem.isChecked = !checklistItem.isChecked;
   }
 
+  /**
+   * Toggles the deleted field
+   *
+   * @param Deletable
+   */
   toggleDeleted(deletable: Deleteable) {
     deletable.isDeleted = !deletable.isDeleted;
   }
