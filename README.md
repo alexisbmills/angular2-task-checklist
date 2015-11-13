@@ -9,7 +9,7 @@ A project to learn Angular2, includes the following:
 ## Install
 ### Clone repository
 ```
-git clone git@bitbucket.org:alexisbmills/ng2-task-checklist.git
+git clone git@github.com:alexisbmills/angular2-task-checklist.git
 ```
 ### Install dependencies
 ```
